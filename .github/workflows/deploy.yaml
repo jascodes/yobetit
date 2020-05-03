@@ -1,10 +1,16 @@
 name: Deploy
 
 on:
-  - repository_dispatch
-  - push
-  - pull_request
-  - pull_request_review
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  pull_request_review:
+    branches:
+      - master
+  repository_dispatch:
 
 jobs:
   deploy:
@@ -14,7 +20,7 @@ jobs:
         shell: bash
         run: |
           echo ::set-env name=BRANCH::$(echo "${GITHUB_REF##*/}")
-          echo ::set-env name=RELEASE_BRANCH::$(echo "publish")
+          echo ::set-env name=RELEASE_BRANCH::$(echo "master")
           echo ::set-env name=PUBLISH_DIR::$(echo "public")
           echo ::set-env name=REPOSITORY_NAME::$(echo ${GITHUB_REPOSITORY} | awk -F / '{print $2}')
           echo ::set-env name=DISCORD_WEBHOOK::${{ secrets.DISCORD_WEBHOOK }}
