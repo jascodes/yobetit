@@ -10,7 +10,6 @@ import { css } from 'linaria'
 import { DropDown } from '@/components/drop_down/drop_down'
 import { autorun } from 'mobx'
 import { useWindowSize } from '@/hooks/use-window-size'
-import { useDOMState } from '@/hooks/use-dom-state'
 
 const background = css`
   background: #fde5fe;
@@ -35,7 +34,6 @@ const getTop = (open: boolean, height: number) => {
 const DropDownContainer = () => {
   const store = useDropDownStore()
   const size = useWindowSize()
-  const dom = useDOMState()
 
   useLayoutEffect(
     () =>
@@ -71,7 +69,7 @@ const DropDownContainer = () => {
         ease: 'expo',
       }
     )
-  }, [dom.readyState === 'complete'])
+  }, [])
 
   return (
     <div
