@@ -1,8 +1,7 @@
-import { observable, action, reaction, toJS, autorun } from 'mobx'
+import { observable, action, toJS, autorun } from 'mobx'
 import axios from 'axios'
 import { Search, AllSubstringsIndexStrategy } from 'js-search'
 import axiosRetry from 'axios-retry'
-import gsap from 'gsap'
 
 axiosRetry(axios, { retries: Infinity })
 
@@ -48,7 +47,7 @@ export class DropDownModel {
   // error = false
 
   @observable
-  mode: 'CLIENT' | 'SERVER' | 'DIRECT' = 'SERVER'
+  mode: 'CLIENT' | 'SERVER' | 'DIRECT' = 'CLIENT'
 
   @observable
   list: CountryProp[]
@@ -138,13 +137,14 @@ export class DropDownModel {
 
   constructor() {
     // Only prefetch all data for client side once perload for filtering
-    if (this.mode === 'CLIENT') this.prefetch()
+    // if (this.mode === 'CLIENT') this.prefetch()
 
     // observe and update filtered list each time I update
     autorun(() => {
       this.open
       switch (this.mode) {
         case 'CLIENT':
+          !this.searchEngine && this.prefetch()
           this.clientFilter(this.searchText)
           break
         case 'DIRECT':

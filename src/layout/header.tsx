@@ -1,41 +1,36 @@
-import { Link } from 'gatsby'
 import React, { SFC } from 'react'
+import { Leading } from '@/layout/leading'
+import { css } from 'linaria'
+import { DDConst } from '../components/drop_down/drop_down_constants'
 
-interface HeaderProp {
-  siteTitle: string
-}
+interface HeaderProp {}
 
-const Header: SFC<HeaderProp> = props => {
+const stHeader = css`
+  width: 100vw;
+  background: ${DDConst.primaryColor};
+`
+
+const headerBox = css`
+  max-width: 960px;
+  margin: auto;
+  padding: 15px 30px;
+`
+const Header: SFC<HeaderProp> = () => {
   return (
-    <header
-      style={{
-        // background: `#975099`,
-        background: '#B91CBF',
-        // marginBottom: `1.45rem`,
-        width: `100vw`,
-      }}
-    >
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `1.45rem 1.0875rem`,
-        }}
-      >
-        <h1 style={{ margin: 0 }}>
-          <Link
-            to="/"
-            style={{
-              color: `white`,
-              textDecoration: `none`,
-            }}
-          >
-            {props.aaa}
-          </Link>
-        </h1>
+    <header className={stHeader}>
+      <div className={headerBox}>
+        <Leading />
       </div>
     </header>
   )
 }
 
 export { Header }
+// <h1 style={{ margin: 0 }}>
+//           <Link
+//             to="/"
+//             style={{
+//               color: `white`,
+//               textDecoration: `none`,
+//             }}
+//           ></Link>

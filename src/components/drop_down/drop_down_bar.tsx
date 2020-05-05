@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { useDropDownStore } from '@/components/drop_down/store/drop_down_store'
 import { DropDownBarTrail } from '@/components/drop_down/drop_down_bar_trail'
 import { css } from 'linaria'
@@ -33,7 +33,7 @@ const flag = css`
 `
 const DropDownBar: SFC<DropDownBarProp> = () => {
   const store = useDropDownStore()
-  useEffect(() => {
+  useLayoutEffect(() => {
     autorun(() =>
       gsap.to(`.${bar}`, {
         borderColor: store.open

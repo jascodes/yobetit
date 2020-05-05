@@ -15,6 +15,7 @@ module.exports = {
         // allExtensions: true, // defaults to false
       },
     },
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-tsconfig-paths',
     {
       resolve: 'gatsby-plugin-transition-link',
