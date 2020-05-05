@@ -6,6 +6,9 @@ import { DDConst } from '../components/drop_down/drop_down_constants'
 interface HeaderProp {}
 
 const stHeader = css`
+  position: fixed;
+  top: 0px;
+  z-index: 100;
   width: 100vw;
   background: ${DDConst.primaryColor};
 `
