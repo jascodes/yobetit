@@ -1,11 +1,10 @@
-import React, { useState, SFC } from 'react'
-import { useDropDownStore } from '@/components/drop_down/store/drop_down_store'
+import React, { SFC } from 'react'
+
 import { DropDownBar } from '@/components/drop_down/drop_down_bar'
-import { DropDownList } from '@/components/drop_down/drop_down_list'
-import { Observer, useObserver } from 'mobx-react-lite'
-import { DropDownSearch } from '@/components/drop_down/drop_down_search'
+
 import { DropDownPanel } from '@/components/drop_down/drop_down_panel'
 import { css } from 'linaria'
+import { DropDownBottomPanel } from '@/components/drop_down/drop_down_bottom_panel'
 
 interface DropDownProp {}
 
@@ -15,11 +14,14 @@ const dropDown = css`
   width: 500px;
 `
 
-export const DropDown: SFC<DropDownProp> = props => {
+export const DropDown: SFC<DropDownProp> = () => {
   return (
-    <div className={dropDown}>
-      <DropDownBar />
-      <DropDownPanel />
-    </div>
+    <>
+      <div className={dropDown}>
+        <DropDownBar />
+        <DropDownPanel />
+      </div>
+      <DropDownBottomPanel />
+    </>
   )
 }

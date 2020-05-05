@@ -10,6 +10,8 @@ import { css } from 'linaria'
 import { DropDown } from '@/components/drop_down/drop_down'
 import { autorun } from 'mobx'
 import { useWindowSize } from '@/hooks/use-window-size'
+import ReactTooltip from 'react-tooltip'
+import { Helmet } from 'react-helmet'
 
 const background = css`
   background: #fde5fe;
@@ -24,6 +26,19 @@ const dropDown = css`
   margin: 0px auto;
   opacity: 0;
 `
+
+const tooltip = css`
+  color: rgba(0, 0, 0, 0.5) !important;
+  padding: 18px;
+  width: 400px;
+  line-height: 19px;
+  letter-spacing: 1px;
+  margin-top: -20px !important;
+  span {
+    text-align: justify !important;
+  }
+`
+
 const getTop = (open: boolean, height: number) => {
   const innerHeight = height - 70
   const closeHeight = (innerHeight - 80) / 2
@@ -92,7 +107,16 @@ const Countries = () => {
   return (
     <Layout>
       <DropDownStoreProvider>
-        <DropDownContainer />
+        <>
+          <Helmet title="Yobetit - Countries" />
+          <DropDownContainer />
+          <ReactTooltip
+            multiline
+            type="light"
+            effect="solid"
+            className={tooltip}
+          />
+        </>
       </DropDownStoreProvider>
     </Layout>
   )

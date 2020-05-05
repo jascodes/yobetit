@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import { css } from 'linaria'
 import { useDropDownStore } from '@/components/drop_down/store/drop_down_store'
-import { autorun } from 'mobx'
+import { autorun, reaction } from 'mobx'
 import { gsap } from 'gsap'
 import { useObserver } from 'mobx-react-lite'
 
@@ -57,12 +57,19 @@ export const DropDownSearch: FunctionComponent<DropDownSearchInputProp> = () => 
         : '0px 0px 0px 2px #f3f3f3'
       gsap.to(t, { boxShadow, ease: 'expo' })
     })
+    reaction(
+      () => store.selected,
+      () => {
+        store.searchText = ''
+      }
+    )
   }, [])
 
   return useObserver(() => (
     <div className={dropDownSearch}>
       <input
         ref={refInput}
+        value={store.searchText}
         placeholder="Search for your country..."
         className={`downdown-input ${searchInput}`}
         onKeyDown={e => {

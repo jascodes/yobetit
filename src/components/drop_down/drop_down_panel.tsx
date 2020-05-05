@@ -7,6 +7,7 @@ import { useDropDownStore } from '@/components/drop_down/store/drop_down_store'
 import ShadowScrollbars from '@/components/shadow_scrollbar'
 import { autorun } from 'mobx'
 import gsap from 'gsap'
+import { useObserver } from 'mobx-react-lite'
 
 interface DropDownPanelProp {}
 
@@ -42,7 +43,7 @@ export const DropDownPanel: FunctionComponent<DropDownPanelProp> = () => {
   useEffect(
     () =>
       autorun(() => {
-        const isBlurDot = store.filteredList?.length >= 10
+        const isBlurDot = store.filteredList?.length >= 5
         const adjust =
           store.filteredList?.length === 0 ? BLUR_HEIGHT - 10 : BLUR_HEIGHT
 
@@ -56,7 +57,7 @@ export const DropDownPanel: FunctionComponent<DropDownPanelProp> = () => {
           document.getElementsByClassName('dropdown_scroll')[0].clientHeight ||
           PANEL_HEIGHT
 
-        const adHeight = isBlurDot ? PANEL_HEIGHT : scrollBarHeight - adjust
+        const adHeight = isBlurDot ? PANEL_HEIGHT : scrollBarHeight // - adjust
 
         const height = store.open ? adHeight || PANEL_HEIGHT : 0
 
@@ -69,7 +70,7 @@ export const DropDownPanel: FunctionComponent<DropDownPanelProp> = () => {
     []
   )
 
-  return (
+  return useObserver(() => (
     <div className={panel}>
       <ShadowScrollbars
         className="dropdown_scroll"
@@ -78,9 +79,10 @@ export const DropDownPanel: FunctionComponent<DropDownPanelProp> = () => {
       >
         <DropDownSearch />
         <DropDownList />
-        <div style={{ height: 25 }} />
+        {store.filteredList?.length >= 5 && <div style={{ height: 25 }} />}
       </ShadowScrollbars>
       <div className={botBlur} />
     </div>
-  )
+  ))
 }
+//  {isBlurDot && <div style={{ height: 25 }} />}
