@@ -5,18 +5,16 @@ import { TransitionPortal } from 'gatsby-plugin-transition-link'
 import { Header } from './header'
 import './layout.css'
 
-interface LayoutProp {
-  title: string
-}
+interface LayoutProp {}
 
 const Layout: SFC<LayoutProp> = props => {
   return (
-    <>
+    <div>
       <TransitionPortal>
         <Header />
       </TransitionPortal>
       {props.children}
-    </>
+    </div>
   )
 }
 

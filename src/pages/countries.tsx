@@ -1,5 +1,4 @@
 import React, { useLayoutEffect } from 'react'
-import Layout from '@/layout/layout'
 
 import { gsap } from 'gsap'
 import {
@@ -105,20 +104,18 @@ const DropDownContainer = () => {
 
 const Countries = () => {
   return (
-    <Layout>
-      <DropDownStoreProvider>
-        <>
-          <Helmet title="Yobetit - Countries" />
-          <DropDownContainer />
-          <ReactTooltip
-            multiline
-            type="light"
-            effect="solid"
-            className={tooltip}
-          />
-        </>
-      </DropDownStoreProvider>
-    </Layout>
+    <DropDownStoreProvider>
+      <>
+        <Helmet title="Yobetit - Countries" />
+        <DropDownContainer />
+        <ReactTooltip
+          multiline
+          type="light"
+          effect="solid"
+          className={tooltip}
+        />
+      </>
+    </DropDownStoreProvider>
   )
 }
 
